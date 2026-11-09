@@ -29,7 +29,7 @@ export const StoreView: React.FC = () => {
   });
 
   return (
-    <div className="bg-[#FFFFFF] min-h-screen pb-20 max-w-md sm:max-w-2xl lg:max-w-5xl mx-auto w-full px-4 sm:px-6 pt-2">
+    <div className="bg-[#FFFFFF] min-h-screen pb-20 max-w-md sm:max-w-2xl lg:max-w-5xl mx-auto w-full px-3.5 sm:px-6 pt-2">
       {/* Greeting & Artisanal Bakery Graphic (Identical to reference Screen 2) */}
       <div className="flex items-center justify-between gap-2 py-3">
         <div className="space-y-1">
@@ -47,7 +47,7 @@ export const StoreView: React.FC = () => {
         </div>
 
         {/* Artisanal Bakery Photo Thumbnail on Right */}
-        <div className="w-22 h-22 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 shadow-sm border border-[#F4EBE2]">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 shadow-sm border border-[#F4EBE2]">
           <img
             src={getImageUrl(HERO_IMAGE_URL)}
             alt="Artisanal Bakery"
@@ -107,7 +107,7 @@ export const StoreView: React.FC = () => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-3.5">
             {filteredProducts.map((product, index) => (
               <ProductCard
                 key={product.id}

@@ -34,11 +34,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, tintIndex = 0
   return (
     <div
       onClick={() => setSelectedProduct(product)}
-      className="bg-white rounded-3xl p-3 shadow-xs hover:shadow-md border border-[#F4F4F5] transition-all duration-200 cursor-pointer flex flex-col justify-between group active:scale-[0.98]"
+      className="bg-white rounded-3xl p-2.5 sm:p-3 shadow-xs hover:shadow-md border border-[#F4F4F5] transition-all duration-200 cursor-pointer flex flex-col justify-between group active:scale-[0.98]"
     >
       <div>
         {/* Soft Pastel Image Box (Identical to reference) */}
-        <div className={`relative ${pastelBg} rounded-2xl overflow-hidden aspect-square flex items-center justify-center p-2.5 mb-2.5`}>
+        <div className={`relative ${pastelBg} rounded-2xl overflow-hidden aspect-square flex items-center justify-center p-2 sm:p-2.5 mb-2 sm:mb-2.5`}>
           <img
             src={getImageUrl(product.image)}
             alt={product.name}

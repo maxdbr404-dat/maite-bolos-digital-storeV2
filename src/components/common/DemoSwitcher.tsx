@@ -128,7 +128,7 @@ export const DemoSwitcher: React.FC = () => {
           {activeView === 'store' && (
             <button
               onClick={() => setMobileFrameMode(!mobileFrameMode)}
-              title={mobileFrameMode ? 'Ver tela cheia' : 'Simular celular 390px'}
+              title={mobileFrameMode ? 'Ver tela cheia' : 'Simular celular (proporção real)'}
               className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#27272A] hover:bg-[#3F3F46] text-[#D4D4D8] hover:text-white border border-[#3F3F46] text-xs transition-colors whitespace-nowrap active:scale-95"
             >
               {mobileFrameMode ? (

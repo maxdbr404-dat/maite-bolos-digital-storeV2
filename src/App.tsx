@@ -50,17 +50,33 @@ const MainAppContent: React.FC = () => {
           <WelcomeScreen onStart={() => setHasSeenWelcome(true)} />
         ) : activeView === 'store' ? (
           mobileFrameMode ? (
-            /* Smartphone simulator mode on desktop */
-            <div className="py-4 sm:py-6 px-2 flex justify-center items-start min-h-screen bg-[#F0F0F2]">
-              <div className="relative w-full max-w-[390px] min-h-[820px] bg-white rounded-[44px] shadow-2xl border-[10px] border-[#18181B] overflow-hidden flex flex-col">
-                {/* Dynamic island */}
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-4 bg-[#18181B] rounded-full z-50 pointer-events-none" />
+            /* Smartphone simulator mode - responsivo e confortável como no celular real */
+            <div className="py-2 sm:py-6 px-1 sm:px-4 flex justify-center items-center min-h-[calc(100vh-50px)] bg-[#F0F0F2]">
+              <div className="relative w-full max-w-[425px] sm:max-w-[430px] h-[calc(100vh-70px)] max-h-[890px] min-h-[640px] bg-white rounded-[38px] sm:rounded-[46px] shadow-2xl border-[4px] sm:border-[7px] border-[#18181B] overflow-hidden flex flex-col">
+                {/* Smartphone Status Bar (Clean Notch + Time + Indicators sem sobrepor o conteúdo) */}
+                <div className="bg-white px-5 pt-3 pb-1 flex items-center justify-between text-[11px] font-bold text-[#18181B] select-none shrink-0 z-40 border-b border-[#F4F4F5]">
+                  <span>9:41</span>
+                  <div className="w-20 h-4 bg-[#18181B] rounded-full flex items-center justify-end px-2 shadow-xs">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#3F3F46]" />
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[10px]">
+                    <span>5G</span>
+                    <div className="w-4 h-2 rounded-[2px] border border-[#18181B] p-[1px] flex items-center">
+                      <div className="w-full h-full bg-[#18181B] rounded-[1px]" />
+                    </div>
+                  </div>
+                </div>
 
-                <div className="flex-1 overflow-y-auto overscroll-contain">
+                <div className="flex-1 overflow-y-auto overscroll-contain no-scrollbar">
                   <Header />
                   <StoreView />
                 </div>
                 <BottomNav />
+
+                {/* Smartphone Home Bar Indicator */}
+                <div className="bg-white py-1.5 flex justify-center items-center shrink-0 z-40 border-t border-[#F4F4F5]">
+                  <div className="w-32 h-1 bg-[#18181B]/80 rounded-full" />
+                </div>
               </div>
             </div>
           ) : (
