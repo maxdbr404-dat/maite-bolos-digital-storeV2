@@ -16,15 +16,14 @@ export const BottomNav: React.FC = () => {
     setTrackingOrder,
     setActiveView,
     activeView,
-    setSelectedCategory,
-    mobileFrameMode
+    setSelectedCategory
   } = useStore();
 
   const newOrdersCount = orders.filter(o => o.status === 'recebido').length;
   const latestOrder = orders[0];
 
   return (
-    <nav className={`${mobileFrameMode ? 'sticky bottom-0' : 'fixed bottom-0 sm:hidden'} left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#F4F4F5] shadow-lg pb-safe`}>
+    <nav className="fixed bottom-0 sm:hidden left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#F4F4F5] shadow-lg pb-safe">
       <div className="grid grid-cols-5 items-center h-15 px-1">
         {/* Início */}
         <button

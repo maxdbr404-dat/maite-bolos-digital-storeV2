@@ -71,8 +71,6 @@ interface StoreContextType {
   addCoupon: (coupon: Omit<Coupon, 'id'>) => void;
   toggleCouponActive: (couponId: string) => void;
   resetDemoData: () => void;
-  mobileFrameMode: boolean;
-  setMobileFrameMode: (val: boolean) => void;
   hasSeenWelcome: boolean;
   setHasSeenWelcome: (seen: boolean) => void;
   isTutorialOpen: boolean;
@@ -89,8 +87,7 @@ const STORAGE_KEYS = {
   COUPONS: 'maite_coupons_v3',
   SETTINGS: 'maite_settings_v3',
   CART: 'maite_cart_v3',
-  WELCOME: 'maite_welcome_seen_v3',
-  FRAME_MODE: 'maite_frame_mode_v3'
+  WELCOME: 'maite_welcome_seen_v3'
 };
 
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -197,14 +194,6 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   });
 
-  const [mobileFrameMode, setMobileFrameMode] = useState<boolean>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEYS.FRAME_MODE);
-      return saved ? JSON.parse(saved) : false;
-    } catch {
-      return false;
-    }
-  });
 
   const [isTutorialOpen, setIsTutorialOpen] = useState<boolean>(false);
   const [activeView, setActiveView] = useState<ActiveView>('store');
@@ -249,9 +238,6 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem(STORAGE_KEYS.WELCOME, JSON.stringify(hasSeenWelcome));
   }, [hasSeenWelcome]);
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEYS.FRAME_MODE, JSON.stringify(mobileFrameMode));
-  }, [mobileFrameMode]);
 
   // Cart calculations
   const cartSubtotal = cart.reduce((acc, item) => acc + item.totalPrice, 0);
@@ -574,8 +560,6 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         addCoupon,
         toggleCouponActive,
         resetDemoData,
-        mobileFrameMode,
-        setMobileFrameMode,
         hasSeenWelcome,
         setHasSeenWelcome,
         isTutorialOpen,

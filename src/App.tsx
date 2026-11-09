@@ -21,8 +21,7 @@ const MainAppContent: React.FC = () => {
     hasSeenWelcome,
     setHasSeenWelcome,
     selectedProduct,
-    setSelectedProduct,
-    mobileFrameMode
+    setSelectedProduct
   } = useStore();
 
   const [showScrollTop, setShowScrollTop] = React.useState(false);
@@ -49,44 +48,12 @@ const MainAppContent: React.FC = () => {
         {activeView === 'store' && !hasSeenWelcome ? (
           <WelcomeScreen onStart={() => setHasSeenWelcome(true)} />
         ) : activeView === 'store' ? (
-          mobileFrameMode ? (
-            /* Smartphone simulator mode - responsivo e confortável como no celular real */
-            <div className="py-2 sm:py-6 px-1 sm:px-4 flex justify-center items-center min-h-[calc(100vh-50px)] bg-[#F0F0F2]">
-              <div className="relative w-full max-w-[425px] sm:max-w-[430px] h-[calc(100vh-70px)] max-h-[890px] min-h-[640px] bg-white rounded-[38px] sm:rounded-[46px] shadow-2xl border-[4px] sm:border-[7px] border-[#18181B] overflow-hidden flex flex-col">
-                {/* Smartphone Status Bar (Clean Notch + Time + Indicators sem sobrepor o conteúdo) */}
-                <div className="bg-white px-5 pt-3 pb-1 flex items-center justify-between text-[11px] font-bold text-[#18181B] select-none shrink-0 z-40 border-b border-[#F4F4F5]">
-                  <span>9:41</span>
-                  <div className="w-20 h-4 bg-[#18181B] rounded-full flex items-center justify-end px-2 shadow-xs">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#3F3F46]" />
-                  </div>
-                  <div className="flex items-center gap-1.5 text-[10px]">
-                    <span>5G</span>
-                    <div className="w-4 h-2 rounded-[2px] border border-[#18181B] p-[1px] flex items-center">
-                      <div className="w-full h-full bg-[#18181B] rounded-[1px]" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex-1 overflow-y-auto overscroll-contain no-scrollbar">
-                  <Header />
-                  <StoreView />
-                </div>
-                <BottomNav />
-
-                {/* Smartphone Home Bar Indicator */}
-                <div className="bg-white py-1.5 flex justify-center items-center shrink-0 z-40 border-t border-[#F4F4F5]">
-                  <div className="w-32 h-1 bg-[#18181B]/80 rounded-full" />
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* Full-width responsive mode (mobile & desktop) */
-            <div className="flex-1 flex flex-col">
-              <Header />
-              <StoreView />
-              <BottomNav />
-            </div>
-          )
+          /* Full-width responsive mode (mobile & desktop) */
+          <div className="flex-1 flex flex-col">
+            <Header />
+            <StoreView />
+            <BottomNav />
+          </div>
         ) : activeView === 'confectioner' ? (
           <ConfectionerView />
         ) : activeView === 'driver' ? (

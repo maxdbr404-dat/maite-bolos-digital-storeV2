@@ -6,8 +6,6 @@ import {
   ChefHat,
   Bike,
   RotateCcw,
-  Smartphone,
-  Monitor,
   HelpCircle
 } from 'lucide-react';
 
@@ -18,8 +16,6 @@ export const DemoSwitcher: React.FC = () => {
     orders,
     cartItemsCount,
     resetDemoData,
-    mobileFrameMode,
-    setMobileFrameMode,
     setIsTutorialOpen
   } = useStore();
 
@@ -125,25 +121,6 @@ export const DemoSwitcher: React.FC = () => {
             <span>Tutorial</span>
           </button>
 
-          {activeView === 'store' && (
-            <button
-              onClick={() => setMobileFrameMode(!mobileFrameMode)}
-              title={mobileFrameMode ? 'Ver tela cheia' : 'Simular celular (proporção real)'}
-              className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#27272A] hover:bg-[#3F3F46] text-[#D4D4D8] hover:text-white border border-[#3F3F46] text-xs transition-colors whitespace-nowrap active:scale-95"
-            >
-              {mobileFrameMode ? (
-                <>
-                  <Monitor className="w-3.5 h-3.5 text-[#FF7243]" />
-                  <span>Tela Cheia</span>
-                </>
-              ) : (
-                <>
-                  <Smartphone className="w-3.5 h-3.5 text-[#FF7243]" />
-                  <span>Simular Celular</span>
-                </>
-              )}
-            </button>
-          )}
 
           <button
             onClick={() => {
