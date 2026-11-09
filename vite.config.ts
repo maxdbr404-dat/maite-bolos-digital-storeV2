@@ -4,7 +4,10 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(({ command }) => {
-  const base = process.env.VITE_BASE_PATH || (command === 'build' ? '/maite-bolos-digital-store/' : '/');
+  let base = process.env.VITE_BASE_PATH || (command === 'build' ? '/maite-bolos-digital-store/' : '/');
+  if (base && !base.endsWith('/')) {
+    base = `${base}/`;
+  }
   return {
     base,
     plugins: [react(), tailwindcss()],
