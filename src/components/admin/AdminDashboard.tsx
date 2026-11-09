@@ -10,6 +10,7 @@ import {
   Coupon
 } from '../../types';
 import { STORE_LOGO_URL } from '../../data/initialData';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import {
   LayoutDashboard,
   ShoppingBag,
@@ -246,6 +247,7 @@ export const AdminDashboard: React.FC = () => {
             <img
               src={STORE_LOGO_URL}
               alt="Maitê Bolos"
+              onError={e => handleImageError(e, 'logo.png')}
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-[#523D2E]"
             />
             <div>
@@ -1196,7 +1198,7 @@ export const AdminDashboard: React.FC = () => {
                     addCategory({
                       name: newCatName.trim(),
                       slug: newCatName.toLowerCase().replace(/\s+/g, '-'),
-                      image: '/src/assets/images/product_bolo_morango_1794237512290.jpg',
+                      image: getImageUrl('bolo-morango.jpg'),
                       description: 'Categoria adicionada no painel administrativo'
                     });
                     setNewCatName('');
@@ -1217,8 +1219,9 @@ export const AdminDashboard: React.FC = () => {
                     className="bg-white rounded-2xl p-3.5 border border-[#EDE2D6] shadow-xs flex items-center gap-3 justify-between"
                   >
                     <img
-                      src={cat.image}
+                      src={getImageUrl(cat.image)}
                       alt={cat.name}
+                      onError={e => handleImageError(e, 'bolo-morango.jpg')}
                       className="w-12 h-12 rounded-full object-cover border border-[#EAE0D5] shrink-0"
                     />
                     <div className="flex-1 min-w-0">
@@ -1736,7 +1739,7 @@ export const AdminDashboard: React.FC = () => {
                 const promo = formData.get('promotionalPrice') ? parseFloat(formData.get('promotionalPrice') as string) : undefined;
                 const description = formData.get('description') as string;
 
-                const mainPhoto = productPhotos[0] || editingProduct?.image || '/src/assets/images/product_bolo_morango_1794237512290.jpg';
+                const mainPhoto = productPhotos[0] || editingProduct?.image || getImageUrl('bolo-morango.jpg');
                 const allPhotos = productPhotos.length > 0 ? productPhotos : (editingProduct?.images || [mainPhoto]);
 
                 if (editingProduct) {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { STORE_LOGO_URL } from '../../data/initialData';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import {
   ChefHat,
   Clock,
@@ -64,8 +65,9 @@ export const ConfectionerView: React.FC = () => {
           <div className="flex items-center gap-3">
             <div className="relative">
               <img
-                src={STORE_LOGO_URL}
+                src={getImageUrl(STORE_LOGO_URL)}
                 alt="Chef Confeiteira Maitê"
+                onError={e => handleImageError(e, 'logo.png')}
                 className="w-12 h-12 rounded-full object-cover border-2 border-[#FF7243]"
               />
               <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-[#2D2118]" />
@@ -190,8 +192,9 @@ export const ConfectionerView: React.FC = () => {
                     {order.items.map(it => (
                       <div key={it.cartItemId} className="flex gap-2">
                         <img
-                          src={it.product.image}
+                          src={getImageUrl(it.product.image)}
                           alt={it.product.name}
+                          onError={e => handleImageError(e, 'bolo-morango.jpg')}
                           className="w-12 h-12 rounded-xl object-cover shrink-0"
                         />
                         <div className="flex-1 min-w-0">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { DRIVER_AVATAR_URL, STORE_LOGO_URL } from '../../data/initialData';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import {
   Bike,
   MapPin,
@@ -47,8 +48,9 @@ export const DriverView: React.FC = () => {
         <div className="max-w-md mx-auto flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <img
-              src={activeDriver.photo}
+              src={getImageUrl(activeDriver.photo)}
               alt={activeDriver.name}
+              onError={e => handleImageError(e, 'entregador.jpg')}
               className="w-11 h-11 rounded-full object-cover border-2 border-white/80"
             />
             <div>

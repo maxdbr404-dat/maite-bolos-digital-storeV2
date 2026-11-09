@@ -1,22 +1,24 @@
 import { Category, Product, DeliveryDriver, Coupon, StoreSettings, Order } from '../types';
+import { getImageUrl } from '../utils/imageUrl';
 
-import logoPatisserie from '../assets/images/maite_logo_patisserie_1794237555058.jpg';
-import heroBakery from '../assets/images/hero_welcome_bakery_1794237511122.jpg';
-import avatarEntregador from '../assets/images/avatar_entregador_1794237540071.jpg';
-import boloMorango from '../assets/images/product_bolo_morango_1794237512290.jpg';
-import boloBrigadeiro from '../assets/images/product_bolo_brigadeiro_1794237511922.jpg';
-import boloCenoura from '../assets/images/product_bolo_cenoura_1794237536926.jpg';
-import boloRedVelvet from '../assets/images/product_red_velvet_1794237537894.jpg';
-import tortaMerengue from '../assets/images/product_torta_merengue_1794237513024.jpg';
-import tortaBanoffee from '../assets/images/product_banoffee_1794237538172.jpg';
-import brigadeirosBox from '../assets/images/product_brigadeiros_box_1794237514941.jpg';
-import browniesBox from '../assets/images/product_brownies_1794237537889.jpg';
-import cupcakesBox from '../assets/images/product_cupcakes_1794237538123.jpg';
-import kitPresente from '../assets/images/product_kit_presente_1794237515315.jpg';
+// Imagens salvas localmente em public/images/ compatíveis com GitHub Pages e Localhost
+export const STORE_LOGO_URL = getImageUrl('logo.png');
+export const HERO_IMAGE_URL = getImageUrl('banner-principal.jpg');
+export const DRIVER_AVATAR_URL = getImageUrl('entregador.jpg');
 
-export const STORE_LOGO_URL = logoPatisserie;
-export const HERO_IMAGE_URL = heroBakery;
-export const DRIVER_AVATAR_URL = avatarEntregador;
+const boloMorango = getImageUrl('bolo-morango.jpg');
+const boloBrigadeiro = getImageUrl('bolo-chocolate.jpg');
+const boloCenoura = getImageUrl('bolo-cenoura.jpg');
+const boloVulcao = getImageUrl('bolo-vulcao.jpg');
+const boloFuba = getImageUrl('bolo-fuba.jpg');
+const boloRedVelvet = getImageUrl('bolo-red-velvet.jpg');
+const tortaMerengue = getImageUrl('torta-limao.jpg');
+const tortaBanoffee = getImageUrl('torta-banoffee.jpg');
+const tortaMousse = getImageUrl('torta-mousse.jpg');
+const brigadeirosBox = getImageUrl('brigadeiros.jpg');
+const browniesBox = getImageUrl('brownies.jpg');
+const cupcakesBox = getImageUrl('cupcakes.jpg');
+const kitPresente = getImageUrl('kit-festa.jpg');
 
 export const INITIAL_CATEGORIES: Category[] = [
   {
@@ -37,7 +39,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     id: 'bolos-caseiros',
     name: 'Bolos Caseiros & Vulcão',
     slug: 'bolos-caseiros',
-    image: boloCenoura,
+    image: boloVulcao,
     description: 'Receitas de família com muita calda artesanal e afeto'
   },
   {
@@ -86,7 +88,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     basePrice: 165.0,
     promotionalPrice: 148.0,
     image: boloMorango,
-    images: [boloMorango, heroBakery],
+    images: [boloMorango, HERO_IMAGE_URL],
     badge: 'mais_vendido',
     rating: 4.9,
     reviewsCount: 48,
@@ -144,8 +146,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: 'A clássica massa fofinha e dourada de cenoura fresca, com piscina transbordando de calda de brigadeiro artesanal que escorre ao cortar.',
     basePrice: 68.0,
     promotionalPrice: 59.0,
-    image: boloCenoura,
-    images: [boloCenoura],
+    image: boloVulcao,
+    images: [boloVulcao, boloCenoura],
     badge: 'mais_vendido',
     rating: 4.9,
     reviewsCount: 84,
@@ -360,8 +362,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     categoryId: 'bolos-caseiros',
     description: 'Receita tradicional caipira com milho e fubá fininho, queijo meia cura e pedaços derretidos de goiabada cascão do interior.',
     basePrice: 52.0,
-    image: boloCenoura,
-    images: [boloCenoura],
+    image: boloFuba,
+    images: [boloFuba],
     badge: 'artesanal',
     rating: 4.8,
     reviewsCount: 29,
@@ -385,8 +387,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     categoryId: 'tortas-finas',
     description: 'Três camadas perfeitas de mousses aveludadas: chocolate meio amargo 70%, chocolate ao leite e chocolate branco sobre massa sablée de cacau.',
     basePrice: 120.0,
-    image: heroBakery,
-    images: [heroBakery],
+    image: tortaMousse,
+    images: [tortaMousse],
     badge: 'destaque',
     rating: 4.9,
     reviewsCount: 34,
@@ -412,7 +414,7 @@ export const INITIAL_DRIVERS: DeliveryDriver[] = [
     id: 'driver-1',
     name: 'Carlos Alberto Silva',
     phone: '(19) 99124-8832',
-    photo: avatarEntregador,
+    photo: DRIVER_AVATAR_URL,
     rating: 4.95,
     status: 'em_rota',
     vehicle: 'Honda CG 160 Fan - Placa EFA-4921 (Bolsa Térmica de Bolos)',
@@ -423,7 +425,7 @@ export const INITIAL_DRIVERS: DeliveryDriver[] = [
     id: 'driver-2',
     name: 'Lucas Henrique Dias',
     phone: '(19) 98845-2190',
-    photo: avatarEntregador,
+    photo: DRIVER_AVATAR_URL,
     rating: 4.88,
     status: 'disponivel',
     vehicle: 'Yamaha Fazer 250 - Placa DKO-3819 (Suporte Rígido Nivelado)',
@@ -434,7 +436,7 @@ export const INITIAL_DRIVERS: DeliveryDriver[] = [
     id: 'driver-3',
     name: 'Rafael Mendes Rocha',
     phone: '(19) 99763-4411',
-    photo: avatarEntregador,
+    photo: DRIVER_AVATAR_URL,
     rating: 4.92,
     status: 'disponivel',
     vehicle: 'Fiat Fiorino Climatizada - Placa MBT-1024',

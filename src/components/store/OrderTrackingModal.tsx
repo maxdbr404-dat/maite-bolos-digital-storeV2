@@ -2,6 +2,7 @@ import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { OrderStatus } from '../../types';
 import { DRIVER_AVATAR_URL } from '../../data/initialData';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import {
   X,
   CheckCircle2,
@@ -134,8 +135,9 @@ export const OrderTrackingModal: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <img
-                    src={DRIVER_AVATAR_URL}
+                    src={getImageUrl(assignedDriver.photo || DRIVER_AVATAR_URL)}
                     alt={assignedDriver.name}
+                    onError={e => handleImageError(e, 'entregador.jpg')}
                     className="w-14 h-14 rounded-2xl object-cover shadow-sm"
                   />
                   <div>

@@ -3,6 +3,7 @@ import { useStore } from '../../context/StoreContext';
 import { CategorySlider } from './CategorySlider';
 import { ProductCard } from './ProductCard';
 import { HERO_IMAGE_URL } from '../../data/initialData';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import { Search, ArrowRight } from 'lucide-react';
 
 export const StoreView: React.FC = () => {
@@ -48,8 +49,9 @@ export const StoreView: React.FC = () => {
         {/* Artisanal Bakery Photo Thumbnail on Right */}
         <div className="w-22 h-22 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 shadow-sm border border-[#F4EBE2]">
           <img
-            src={HERO_IMAGE_URL}
+            src={getImageUrl(HERO_IMAGE_URL)}
             alt="Artisanal Bakery"
+            onError={e => handleImageError(e, 'banner-principal.jpg')}
             className="w-full h-full object-cover"
           />
         </div>

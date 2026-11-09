@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import {
   X,
   Trash2,
@@ -92,8 +93,9 @@ export const CartDrawer: React.FC = () => {
                   {/* Thumbnail */}
                   <div className="w-16 h-16 rounded-2xl bg-white p-1 overflow-hidden shrink-0 shadow-xs flex items-center justify-center">
                     <img
-                      src={item.product.image}
+                      src={getImageUrl(item.product.image)}
                       alt={item.product.name}
+                      onError={e => handleImageError(e, 'bolo-morango.jpg')}
                       className="w-full h-full object-cover rounded-xl"
                     />
                   </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Product } from '../../types';
 import { useStore } from '../../context/StoreContext';
 import { Plus } from 'lucide-react';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 
 interface ProductCardProps {
   product: Product;
@@ -39,9 +40,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, tintIndex = 0
         {/* Soft Pastel Image Box (Identical to reference) */}
         <div className={`relative ${pastelBg} rounded-2xl overflow-hidden aspect-square flex items-center justify-center p-2.5 mb-2.5`}>
           <img
-            src={product.image}
+            src={getImageUrl(product.image)}
             alt={product.name}
             loading="lazy"
+            onError={e => handleImageError(e, 'bolo-morango.jpg')}
             className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
           />
         </div>

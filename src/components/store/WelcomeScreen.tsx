@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { HERO_IMAGE_URL } from '../../data/initialData';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import { ArrowRight } from 'lucide-react';
 
 export const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) => {
@@ -31,8 +32,9 @@ export const WelcomeScreen: React.FC<{ onStart: () => void }> = ({ onStart }) =>
 
           {/* Pastry Collection Photo */}
           <img
-            src={HERO_IMAGE_URL}
+            src={getImageUrl(HERO_IMAGE_URL)}
             alt="Delicious Bakery Pastries"
+            onError={e => handleImageError(e, 'banner-principal.jpg')}
             className="w-full h-full object-cover rounded-3xl shadow-xl border border-[#F4EBE2]"
           />
         </div>

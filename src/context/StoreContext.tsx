@@ -19,6 +19,7 @@ import {
   INITIAL_COUPONS,
   INITIAL_SETTINGS
 } from '../data/initialData';
+import { getImageUrl } from '../utils/imageUrl';
 
 interface StoreContextType {
   products: Product[];
@@ -81,15 +82,15 @@ interface StoreContextType {
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
 
 const STORAGE_KEYS = {
-  PRODUCTS: 'maite_products_v2',
-  CATEGORIES: 'maite_categories_v2',
-  ORDERS: 'maite_orders_v2',
-  DRIVERS: 'maite_drivers_v2',
-  COUPONS: 'maite_coupons_v2',
-  SETTINGS: 'maite_settings_v2',
-  CART: 'maite_cart_v2',
-  WELCOME: 'maite_welcome_seen_v2',
-  FRAME_MODE: 'maite_frame_mode_v2'
+  PRODUCTS: 'maite_products_v3',
+  CATEGORIES: 'maite_categories_v3',
+  ORDERS: 'maite_orders_v3',
+  DRIVERS: 'maite_drivers_v3',
+  COUPONS: 'maite_coupons_v3',
+  SETTINGS: 'maite_settings_v3',
+  CART: 'maite_cart_v3',
+  WELCOME: 'maite_welcome_seen_v3',
+  FRAME_MODE: 'maite_frame_mode_v3'
 };
 
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -98,13 +99,14 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const saved = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
       if (saved) {
         const parsed: Product[] = JSON.parse(saved);
-        // Fix any old hardcoded unbundled /src/assets paths with current bundled images
         return parsed.map(prod => {
           const defaultMatch = INITIAL_PRODUCTS.find(p => p.id === prod.id);
-          const image = prod.image && !prod.image.startsWith('/src/assets') ? prod.image : (defaultMatch?.image || INITIAL_PRODUCTS[0].image);
-          const images = prod.images && prod.images.length > 0
-            ? prod.images.map(img => img.startsWith('/src/assets') ? image : img)
-            : [image];
+          const image = defaultMatch ? defaultMatch.image : getImageUrl(prod.image);
+          const images = defaultMatch
+            ? defaultMatch.images
+            : (prod.images && prod.images.length > 0
+                ? prod.images.map(img => getImageUrl(img))
+                : [image]);
           return { ...prod, image, images };
         });
       }
@@ -121,7 +123,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         const parsed: Category[] = JSON.parse(saved);
         return parsed.map(cat => {
           const defaultMatch = INITIAL_CATEGORIES.find(c => c.id === cat.id);
-          const image = cat.image && !cat.image.startsWith('/src/assets') ? cat.image : (defaultMatch?.image || INITIAL_CATEGORIES[0].image);
+          const image = defaultMatch ? defaultMatch.image : getImageUrl(cat.image);
           return { ...cat, image };
         });
       }
@@ -143,7 +145,17 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [drivers, setDrivers] = useState<DeliveryDriver[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.DRIVERS);
-      return saved ? JSON.parse(saved) : INITIAL_DRIVERS;
+      if (saved) {
+        const parsed: DeliveryDriver[] = JSON.parse(saved);
+        return parsed.map(d => {
+          const defaultMatch = INITIAL_DRIVERS.find(item => item.id === d.id);
+          return {
+            ...d,
+            photo: defaultMatch ? defaultMatch.photo : getImageUrl(d.photo)
+          };
+        });
+      }
+      return INITIAL_DRIVERS;
     } catch {
       return INITIAL_DRIVERS;
     }
@@ -419,15 +431,28 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const addProduct = (prodData: Omit<Product, 'id'>) => {
+    const resolvedImage = getImageUrl(prodData.image || 'bolo-morango.jpg');
     const newProd: Product = {
       ...prodData,
+      image: resolvedImage,
+      images: prodData.images && prodData.images.length > 0
+        ? prodData.images.map(img => getImageUrl(img))
+        : [resolvedImage],
       id: `prod-${Date.now()}`
     };
     setProducts(prev => [newProd, ...prev]);
   };
 
   const updateProduct = (updated: Product) => {
-    setProducts(prev => prev.map(p => (p.id === updated.id ? updated : p)));
+    const resolvedImage = getImageUrl(updated.image);
+    const resolvedProd: Product = {
+      ...updated,
+      image: resolvedImage,
+      images: updated.images && updated.images.length > 0
+        ? updated.images.map(img => getImageUrl(img))
+        : [resolvedImage]
+    };
+    setProducts(prev => prev.map(p => (p.id === resolvedProd.id ? resolvedProd : p)));
   };
 
   const deleteProduct = (productId: string) => {
@@ -443,6 +468,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const addCategory = (catData: Omit<Category, 'id'>) => {
     const newCat: Category = {
       ...catData,
+      image: getImageUrl(catData.image || 'bolo-morango.jpg'),
       id: `cat-${Date.now()}`
     };
     setCategories(prev => [...prev, newCat]);

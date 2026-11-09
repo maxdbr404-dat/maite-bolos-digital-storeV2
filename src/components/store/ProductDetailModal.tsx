@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Product, ProductSize } from '../../types';
 import { useStore } from '../../context/StoreContext';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import {
   ArrowLeft,
   Heart,
@@ -46,8 +47,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
   const [customerNotes, setCustomerNotes] = useState<string>('');
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
-  const allImages = product.images && product.images.length > 0 ? product.images : [product.image];
-  const [activeImage, setActiveImage] = useState<string>(product.image);
+  const allImages = (product.images && product.images.length > 0 ? product.images : [product.image]).map(img => getImageUrl(img));
+  const [activeImage, setActiveImage] = useState<string>(getImageUrl(product.image));
 
   // Price calculations
   const basePrice = product.promotionalPrice || product.basePrice;
@@ -117,8 +118,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
           <div className="relative flex items-center justify-center pt-1">
             <div className="w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center">
               <img
-                src={activeImage}
+                src={getImageUrl(activeImage)}
                 alt={product.name}
+                onError={e => handleImageError(e, 'bolo-morango.jpg')}
                 className="w-full h-full object-contain drop-shadow-lg transition-all duration-300"
               />
             </div>
@@ -169,7 +171,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                   }`}
                   aria-label={`Ver foto ${idx + 1}`}
                 >
-                  <img src={img} alt={`Foto ${idx + 1}`} className="w-full h-full object-cover" />
+                  <img
+                    src={getImageUrl(img)}
+                    alt={`Foto ${idx + 1}`}
+                    onError={e => handleImageError(e, 'bolo-morango.jpg')}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>

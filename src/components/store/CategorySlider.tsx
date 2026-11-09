@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { STORE_LOGO_URL } from '../../data/initialData';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 
 export const CategorySlider: React.FC = () => {
   const { categories, selectedCategory, setSelectedCategory } = useStore();
@@ -32,8 +33,9 @@ export const CategorySlider: React.FC = () => {
             <div className="bg-[#FF7243] text-white rounded-3xl p-2 w-16 h-22 flex flex-col items-center justify-between shadow-md shadow-[#FF7243]/20">
               <div className="w-12 h-12 rounded-full bg-white p-1 overflow-hidden shadow-xs flex items-center justify-center">
                 <img
-                  src={STORE_LOGO_URL}
+                  src={getImageUrl(STORE_LOGO_URL)}
                   alt="Todos"
+                  onError={e => handleImageError(e, 'logo.png')}
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
@@ -43,8 +45,9 @@ export const CategorySlider: React.FC = () => {
             <div className="flex flex-col items-center gap-1.5 w-16">
               <div className="w-14 h-14 rounded-full bg-[#F4F4F5] hover:bg-[#EAEAEA] p-1.5 overflow-hidden border border-[#E4E4E7] transition-all flex items-center justify-center">
                 <img
-                  src={STORE_LOGO_URL}
+                  src={getImageUrl(STORE_LOGO_URL)}
                   alt="Todos"
+                  onError={e => handleImageError(e, 'logo.png')}
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
@@ -69,8 +72,9 @@ export const CategorySlider: React.FC = () => {
                 <div className="bg-[#FF7243] text-white rounded-3xl p-2 w-16 h-22 flex flex-col items-center justify-between shadow-md shadow-[#FF7243]/20">
                   <div className="w-12 h-12 rounded-full bg-white p-0.5 overflow-hidden shadow-xs flex items-center justify-center">
                     <img
-                      src={category.image}
+                      src={getImageUrl(category.image)}
                       alt={category.name}
+                      onError={e => handleImageError(e, 'bolo-morango.jpg')}
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
@@ -83,8 +87,9 @@ export const CategorySlider: React.FC = () => {
                 <div className="flex flex-col items-center gap-1.5 w-16">
                   <div className="w-14 h-14 rounded-full bg-[#F4F4F5] hover:bg-[#EAEAEA] p-1 overflow-hidden border border-[#E4E4E7] transition-all flex items-center justify-center">
                     <img
-                      src={category.image}
+                      src={getImageUrl(category.image)}
                       alt={category.name}
+                      onError={e => handleImageError(e, 'bolo-morango.jpg')}
                       className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform"
                     />
                   </div>
