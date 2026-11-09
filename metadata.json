@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Maitê Bolos e Doces - Loja Digital \u0026 Gestão",
+  "description": "Protótipo frontend de alta fidelidade para a confeitaria Maitê Bolos e Doces: experiência mobile de compra, catálogo, checkout com Pix, rastreamento, painel administrativo e aplicativo do entregador.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
